@@ -11,3 +11,13 @@ two:
   description: MyText
   image_url: MyString
   price: 1.5
+
+nectar:
+  title:       Aloe Berry Nectar
+  description:
+    All the benefits of Aloe Vera Gel coupled with a sweet blend of apple
+    and cranberry juice - high in antioxidant vitamins A and C.
+    It is a healthy drink with a great taste that cab aid in cleansing
+    the digestive system. (1 litre)
+  price:       26.99
+  image_url:   nectar.png
