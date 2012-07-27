@@ -92,3 +92,15 @@ div#container
             }
         }
     }
+#side a {
+    color: #bfb;
+    font-size: small;
+}
+
+#side ul {
+    padding: 0;
+}
+
+#side li {
+    list-style: none;
+}
