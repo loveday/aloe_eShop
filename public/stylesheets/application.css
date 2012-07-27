@@ -123,3 +123,38 @@ div#container
     font-weight: bold;
     border-top: 1px solid #595;
 }
+
+/**=============================================================**/
+/* Styles for order form */
+
+.aloe_form fieldset {
+    background: #efe;
+}
+
+.aloe_form legend {
+    color: #dfd;
+    background: #141;
+    font-family: sans-serif;
+    padding: 0.2em 1em;
+}
+
+.aloe_form label {
+    width: 5em;
+    float: left;
+    text-align: right;
+    padding-top: 0.2em;
+    margin-right: 0.1em;
+    display: block;
+}
+
+.aloe_form select, .aloe_form textarea, .aloe_form input {
+    margin-left: 0.5em;
+}
+
+.aloe_form .submit {
+    margin-left: 4em;
+}
+
+.aloe_form div {
+    margin: 0.5em 0;
+}

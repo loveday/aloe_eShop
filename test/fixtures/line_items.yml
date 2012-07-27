@@ -2,7 +2,7 @@
 
 one:
   product: nectar
-  cart: one
+  order: one
 
 two:
   product: nectar
