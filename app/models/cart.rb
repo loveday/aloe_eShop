@@ -1,24 +1,21 @@
 class Cart < ActiveRecord::Base
-  has_many :line_items, :dependent => :destroy
+  has_many :line_items, dependent: :destroy
+
   #REFERENCE LaptopShop Tutorial3
-  def add_product(product)
-    current_item = line_items.where(:product_id =>
-                                        product.id).first
+  def add_product(product_id)
+    current_item = line_items.find_by_product_id(product_id)
     if current_item
       current_item.quantity += 1
     else
-      current_item = LineItem.new(:product_id =>
-                                      product.id)
-      line_items << current_item
+      current_item = line_items.build(product_id: product_id)
+      current_item.price = current_item.product.price
     end
     current_item
   end
+
+
   #REFERENCE LaptopShop Tutorial4
   def total_price
-    total = 0
-    line_items.each do |line_item|
-      total += line_item.product.price * line_item.quantity
-    end
-    total
+    line_items.to_a.sum { |item| item.total_price }
   end
 end
