@@ -1,6 +1,9 @@
-<h1>Create User</h1>
-<% form_for(@user) do |f| %>
-    <% if @user.errors.any? %>
+<div class="aloe_form">
+  <h1>Register a User Account</h1>
+
+
+    <% form_for(@user) do |f| %>
+        <% if @user.errors.any? %>
         <div id="errorExplanation">
           <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
           <ul>
@@ -10,16 +13,33 @@
           </ul>
         </div>
     <% end %>
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.text_field :email %>
+
+  <fieldset>
+    <legend>Enter User Details</legend>
+
+    <div>
+      <%= f.label :name %>:
+      <%= f.text_field :name, :size => 40 %>
     </div>
-    <div class="field">
-      <%= f.label :password %><br />
-      <%= f.password_field :password %>
+
+    <div>
+      <%= f.label :email %>:
+      <%= f.text_field :email, :size => 40 %>
     </div>
-    <div class="actions">
-      <%= f.submit "Create User"%>
+
+    <div>
+      <%= f.label :password, 'Password' %>:
+      <%= f.password_field :password, :size => 40 %>
     </div>
+
+    <div>
+      <%= f.label :password_confirmation, 'Confirm' %>:
+      <%= f.password_field :password_confirmation, :size => 40 %>
+    </div>
+
+    <div>
+      <%= f.submit "Create User", :class => "submit" %>
+    </div>
+  </fieldset>
 <% end %>
-<%= link_to 'Back', products_path %>
+</div>

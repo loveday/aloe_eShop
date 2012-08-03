@@ -1,7 +1,27 @@
+# Copyright Notice
+# We do not hold full Copyright to the codes
+# The codes in this App is a combination of code snippets from
+# NCI Class Tutorials and the  {Agile Web Development with Rails}
+#[http://www.pragprog.com/titles/rails4/agile-web-development-with-rails-4th-edition].
 class ApplicationController < ActionController::Base
+  #before_filter :authorize    #Requires authorization before any/every access to the App
+
   protect_from_forgery
 
   protected
+                              # Limiting User Access
+  def authorize
+    if request.format == Mime::HTML
+      unless User.find_by_id(session[:user_id])
+        redirect_to login_url, notice: "Please log in"
+      end
+    else
+      authenticate_or_request_with_http_basic do |username, password|
+        user = User.authenticate(username, password)
+      end
+    end
+  end
+
 # Returns the currently logged in user or nil if there isn't one
   def current_user
     return unless session[:user_id]
@@ -27,6 +47,7 @@ class ApplicationController < ActionController::Base
   def access_denied
     redirect_to login_path, :notice => "Please log in to continue" and return false
   end
+
 
   private
   def current_cart

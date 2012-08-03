@@ -4,13 +4,7 @@
 
 <h2>Your Shopping Cart</h2>
 <table>
-  <% for item in @cart.line_items %>
-    <tr>
-       <td><%= item.quantity %>&times;</td>
-       <td><%= item.product.name %></td>
-       <td class="item_price"><%= number_to_currency(item.total_price, :unit => '&euro;') %></td>
-     </tr>
-  <% end %>
+  <%= render(@cart.line_items) %>
 
   <tr class="total_line">
     <td colspan="2">Total</td>
@@ -19,7 +13,21 @@
 
 </table>
 <br/>
-<%= button_to "Checkout", new_order_path, method: :get %>
+<!-- Adding a check to know if User is Registered or Logged on
+    If logged in, User can access the checkout button, else, he has to register -->
+<% if session[:user_id] %>
+
+    <%= button_to "Checkout", new_order_path, method: :get %>
+
+<% else %>
+<%= button_to "Register", :controller => "users", :action => "new" %>
+<!-- End Log-in Check -->
+<% end %>
+
+
+
+
+
 
   <br/>   <br/>
   <%= button_to 'Empty cart', @cart, method: :delete,

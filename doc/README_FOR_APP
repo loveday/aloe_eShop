@@ -1,2 +1,37 @@
-Use this README file to introduce your application and point to useful places in the API for learning more.
-Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+= The Loveday & Yulia Online eStore
+
+The domain/business chosen for this Project is Aloe Vera Health & Beauty Store. This is an e-commerce web application for Aloe Vera health and beauty products range available to purchase online.
+Aloe Vera is used in a wide range of products, for example skin and hair care products, as well as beauty and make-up, Aloe Vera juice, supplements and nutrition, and more recently in household cleaners. In fact, the list of uses continues to grow as we rediscover why the Aloe Vera plant was so highly regarded in the first place, which nurtures a huge interest and provides a demand for these products on the market.
+There are many Aloe Vera manufacturers of different brands available in the marketplace in our days.  For the purpose of this Project, we have chosen Aloe Vera products produced by Forever Living Products Company.
+
+
+This application implemented on Rails Version 3.0.10 is am online Store which comprises of a Catalogue, shopping Cart and Orders.
+
+The Web App is divided in to two main functional Sections:
+(a.)	The Buyer Side
+(b.)	The Administrator ONLY Side
+
+•	The Buyer Side comprises of the Catalogue, Shopping Cart and Checkout.
+This is implemented using Four Models, associated Controllers and Views.
+Models: Cart, LineItem, Order, Product
+Controllers: StoreController (For the Store Front); SessionController (Manages User sessions)
+
+•	 The Administrator Side has full control over the App, thus controlling both the Buyer and Seller side of the App. This is implemented as thus:
+Controllers: LoginController  (Product maintenance, Order fulfilment etc.) This is enforced by the ApplicationController#authorize Method.
+Resources: Users and Carts Resources (assists the Controllers)
+
+The codes in this App is a combination of code snippets from NCI Class Tutorials and the  {Agile Web Development with Rails}[http://www.pragprog.com/titles/rails4/agile-web-development-with-rails-4th-edition]. 
+
+
+=== Authors
+ 
+ * Anyim Loveday C
+ * Yuylia Karachova
+
+=== Warranty
+ 
+This code is presented as it is, and comes with absolutely no warranty. It is not recommended to be used in live applications.
+ 
+== Copyright
+ 
+We do not hold full Copyright to the codes

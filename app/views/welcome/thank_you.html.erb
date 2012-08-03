@@ -1,1 +1,18 @@
-<h1>Thank you for visiting!</h1>
+<% if logged_in? %>
+    <h1>Thank you <u>[ <%= current_user.name %> ]</u> for visiting!</h1>
+
+    <ul>
+      <li> Hello: <%= current_user.name %></li>
+      <li> Today is <%= Time.now %></li>
+      <li>Email: <%= current_user.email %></li>
+    </ul>
+    <% if session[:user_id] %>
+        <p>Please remember to Log Out from your Account before you exit</p>
+        <%= button_to 'Logout', logout_path, method: :delete %>
+    <% end %>
+    <% else %>
+    <h1>Thank you for visiting!</h1>
+    <p>We do Hope you enjoyed your shopping with us.   <br/>
+      Please do come back and visit our Shop.</p>
+
+<% end %>

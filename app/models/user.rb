@@ -1,6 +1,11 @@
-require 'digest'
+require 'digest/sha2'
+
 class User < ActiveRecord::Base
-  has_many :products
+  validates :name, presence: true, uniqueness: true
+
+  validates :password, confirmation: true
+  attr_accessor :password_confirmation
+  attr_reader   :password
 
   validates :email,
             :uniqueness => true,
@@ -12,23 +17,46 @@ class User < ActiveRecord::Base
             :length => {:within => 4..20},
             :presence => true
 
-  attr_accessor :password
-  before_save :encrypt_password
+  validate  :password_must_be_present
 
-  def self.authenticate(email, password)
-    user = find_by_email(email)
-    return user if user && user.authenticated?(password)
-  end
-  def authenticated?(password)
-    self.hashed_password == encrypt(password)
+  def User.authenticate(name, password)
+    if user = find_by_name(name)
+      if user.hashed_password == encrypt_password(password, user.salt)
+        user
+      end
+    end
   end
 
-  protected
-  def encrypt_password
-    return if password.blank?
-    self.hashed_password = encrypt(password)
+  def User.encrypt_password(password, salt)
+    Digest::SHA2.hexdigest(password + "wibble" + salt)
   end
-  def encrypt(string)
-    Digest::SHA1.hexdigest(string)
+
+  # 'password' is a virtual attribute
+  def password=(password)
+    @password = password
+
+    if password.present?
+      generate_salt
+      self.hashed_password = self.class.encrypt_password(password, salt)
+    end
+  end
+
+  private
+
+  def password_must_be_present
+    errors.add(:password, "Missing password") unless hashed_password.present?
+  end
+
+  def generate_salt
+    self.salt = self.object_id.to_s + rand.to_s
+  end
+
+  after_destroy :ensure_an_admin_remains
+
+  private
+  def ensure_an_admin_remains
+    if User.count.zero?
+      raise "Can't delete last user"
+    end
   end
 end

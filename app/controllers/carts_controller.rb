@@ -1,4 +1,11 @@
+# Copyright Notice
+# We do not hold full Copyright to the codes
+# The codes in this App is a combination of code snippets from
+# NCI Class Tutorials and the  {Agile Web Development with Rails}
+#[http://www.pragprog.com/titles/rails4/agile-web-development-with-rails-4th-edition].
 class CartsController < ApplicationController
+ # skip_before_filter :authorize, only: [:create, :update, :destroy]
+
   # GET /carts
   # GET /carts.xml
   def index
@@ -86,8 +93,7 @@ class CartsController < ApplicationController
     session[:cart_id] = nil
 
     respond_to do |format|
-      format.html { redirect_to(store_url,
-             notice: 'Your cart is currently empty') }
+      format.html { redirect_to(store_url) }
       format.xml  { head :ok }
     end
   end
